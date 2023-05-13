@@ -1,0 +1,36 @@
+﻿@page
+@using WebApplication1.Pages;
+@model IndexModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Books</h1>
+
+<a class="btn btn-primary" href="CreateBook">Add Book</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Read</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@(book.IsRead ? "Yes" : "No")</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@book.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

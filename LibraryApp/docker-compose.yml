@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  libraryapp:
+    image: ${DOCKER_REGISTRY-}libraryapp
+    container_name: LibraryApp
+    build:
+      context: .
+      dockerfile: LibraryApp/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: LibrarySQLServer
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Dotnet2024!
+    ports:
+      - "1433:1433"
