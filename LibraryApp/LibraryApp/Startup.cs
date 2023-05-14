@@ -33,6 +33,7 @@ namespace LibraryApp
                 using var scope = serviceProvider.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
 
+                //drop Database
                 dbContext.Database.EnsureCreated();
 
                 var setupSql = File.ReadAllText("setup.sql");

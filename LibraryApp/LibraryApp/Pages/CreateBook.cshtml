@@ -4,22 +4,166 @@
     ViewData["Title"] = "Create Book";
 }
 
+<style>
+    body {
+        background-image: url("/images/choose-book.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-column {
+        flex-basis: 48%;
+    }
+
+    /* Add margin-bottom to create space between specific fields */
+    #title,
+    #author,
+    #year,
+    #language,
+    #read,
+    #type
+    #grade
+    {
+        margin-bottom: 20px;
+    }
+    #photo
+    {
+		margin-bottom: 0px;
+	}
+
+    table {
+        background-color: rgba(255, 255, 255, 0.9); /* Set a semi-transparent white background for the table */
+    }
+
+        /* Customize the table styles as needed */
+        table th {
+            background-color: #333; /* Set the background color of table headers */
+            color: black; /* Set the text color of table headers */
+        }
+
+        table td {
+            background-color: #fff; /* Set the background color of table cells */
+            color: black;
+        }
+
+    .footer {
+        background-color: white; /* Set the background color with some transparency */
+        color: black;
+    }
+</style>
+
 <h1>Create Book</h1>
 
 <form method="post">
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input class="form-control" type="text" id="title" name="Title" required>
+    <div class="form-row">
+        <div class="form-column">
+            <div class="form-group">
+                <input class="form-control" type="text" id="title" name="Title" placeholder="Title" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" id="author" name="Author" placeholder="Author" required>
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isread" name="IsRead" value="true" required>
+                <label class="form-check-label" for="isread">Read</label>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" id="image" name="PhotoUrl" placeholder="Photo">
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="author">Author:</label>
-        <input class="form-control" type="text" id="author" name="Author" required>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="isread" name="IsRead" value=true>
-        <label class="form-check-label" for="isread">Read</label>
-    </div>
+    <div class="form-row">
+        <div class="form-column">
+            <div class="form-group">
+                <input class="form-control" type="number" id="year" name="Year" placeholder="Year">
+            </div>
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select class="form-control" id="language" name="Language">
+                    <option value="English">English</option>
+                    <option value="Romanian">Romanian</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Swedish">Swedish</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Ukrainian">Ukrainian</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Catalan">Catalan</option>
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Slovak">Slovak</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Other">Other</option>"
+                </select>
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select class="form-control" id="type" name="Type">
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Comic">Comic</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Historical">Historical</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Western">Western</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <select class="form-control" id="grade" name="Grade">
+                    <option value="1">1</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
 
-
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" id="description" name="Description" placeholder="Descripton" rows="5"></textarea>
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>

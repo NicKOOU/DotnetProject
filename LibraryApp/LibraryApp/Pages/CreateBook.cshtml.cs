@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.IO;
 
 namespace LibraryApp.Pages
 {
@@ -12,21 +15,17 @@ namespace LibraryApp.Pages
             _dbContext = dbContext;
         }
 
-        public IActionResult OnPost(string title, string author, bool isread)
+        [BindProperty]
+        public Book Book { get; set; }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            var book = new Book
-            {
-                Title = title,
-                Author = author,
-                IsRead = isread
-            };
-
-            _dbContext.Books.Add(book);
+            
+            _dbContext.Books.Add(Book);
             _dbContext.SaveChanges();
 
             return RedirectToPage("Index");

@@ -1,0 +1,162 @@
+﻿@page
+@model LibraryApp.Pages.EditBookModel
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<style>
+    body {
+        background-image: url("/images/choose-book.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-column {
+        flex-basis: 48%;
+    }
+
+    /* Add margin-bottom to create space between specific fields */
+    #title,
+    #author,
+    #year,
+    #language,
+    #read,
+    #type
+    #grade {
+        margin-bottom: 20px;
+    }
+
+    #photo {
+        margin-bottom: 0px;
+    }
+
+    table {
+        background-color: rgba(255, 255, 255, 0.9); /* Set a semi-transparent white background for the table */
+    }
+
+        /* Customize the table styles as needed */
+        table th {
+            background-color: #333; /* Set the background color of table headers */
+            color: black; /* Set the text color of table headers */
+        }
+
+        table td {
+            background-color: #fff; /* Set the background color of table cells */
+            color: black;
+        }
+
+    .footer {
+        background-color: white; /* Set the background color with some transparency */
+        color: black;
+    }
+</style>
+
+<h1>Edit Book</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input class="form-control" type="text" id="title" name="Book.Title" value="@Model.Book.Title" required>
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <input class="form-control" type="text" id="author" name="Book.Author" value="@Model.Book.Author" required>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="isread">Read</label>
+        <input class="form-check-input" type="checkbox" id="isread" name="IsRead" value="@Model.Book.IsRead" @(Model.Book.IsRead ? "checked" : "")>
+    </div>
+    <div class="form-group">
+        <label for="image">Image:</label>
+        <input class="form-control" type="text" id="image" name="Book.PhotoUrl" value="@Model.Book.PhotoUrl">
+    </div>
+    <div class="form-group">
+        <label for="year">Year:</label>
+        <input class="form-control" type="number" id="year" name="Book.Year" value="@Model.Book.Year">
+    </div>
+    <div class="form-group">
+        <label for="language">Language:</label>
+        <select class="form-control" id="language" name="Book.Language">
+            <option value="English" selected="@(Model.Book.Language == "English")">English</option>
+            <option value="Romanian" selected="@(Model.Book.Language == "Romanian")">Romanian</option>
+            <option value="French" selected="@(Model.Book.Language == "French")">French</option>
+            <option value="German" selected="@(Model.Book.Language == "German")">German</option>
+            <option value="Spanish" selected="@(Model.Book.Language == "Spanish")">Spanish</option>
+            <option value="Italian" selected="@(Model.Book.Language == "Italian")">Italian</option>
+            <option value="Russian" selected="@(Model.Book.Language == "Russian")">Russian</option>
+            <option value="Chinese" selected="@(Model.Book.Language == "Chinese")">Chinese</option>
+            <option value="Japanese" selected="@(Model.Book.Language == "Japanese")">Japanese</option>
+            <option value="Korean" selected="@(Model.Book.Language == "Korean")">Korean</option>
+            <option value="Arabic" selected="@(Model.Book.Language == "Arabic")">Arabic</option>
+            <option value="Turkish" selected="@(Model.Book.Language == "Turkish")">Turkish</option>
+            <option value="Postuguese" selected="@(Model.Book.Language == "Postuguese")">Postuguese</option>
+            <option value="Dutch" selected="@(Model.Book.Language == "Dutch")">Dutch</option>
+            <option value="Polish" selected="@(Model.Book.Language == "Polish")">Polish</option>
+            <option value="Swedish" selected="@(Model.Book.Language == "Swedish")">Swedish</option>
+            <option value="Norwegian" selected="@(Model.Book.Language == "Norwegian")">Norwegian</option>
+            <option value="Danish" selected="@(Model.Book.Language == "Danish")">Danish</option>
+            <option value="Finnish" selected="@(Model.Book.Language == "Finnish")">Finnish</option>
+            <option value="Greek" selected="@(Model.Book.Language == "Greek")">Greek</option>
+            <option value="Hindi" selected="@(Model.Book.Language == "Hindi")">Hindi</option>
+            <option value="Hungarian" selected="@(Model.Book.Language == "Hungarian")">Hungarian</option>
+            <option value="Indonesian" selected="@(Model.Book.Language == "Indonesian")">Indonesian</option>
+            <option value="Persian" selected="@(Model.Book.Language == "Persian")">Persian</option>
+            <option value="Thai" selected="@(Model.Book.Language == "Thai")">Thai</option>
+            <option value="Vietnamese" selected="@(Model.Book.Language == "Vietnamese")">Vietnamese</option>
+            <option value="Czech" selected="@(Model.Book.Language == "Czech")">Czech</option>
+            <option value="Ukrainian" selected="@(Model.Book.Language == "Ukrainian")">Ukrainian</option>
+            <option value="Croatian" selected="@(Model.Book.Language == "Croatian")">Croatian</option>
+            <option value="Catalan" selected="@(Model.Book.Language == "Catalan")">Catalan</option>
+            <option value="Bulgarian" selected="@(Model.Book.Language == "Bulgarian")">Bulgarian</option>
+            <option value="Slovak" selected="@(Model.Book.Language == "Slovak")">Slovak</option>
+            <option value="Lithuanian" selected="@(Model.Book.Language == "Lithuanian")">Lithuanian</option>
+            <option value="Other" selected="@(Model.Book.Language == "Other")">Other</option>
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <select class="form-control" id="type" name="Book.Type">
+            <option value="Action" selected="@(Model.Book.Type == "Action")">Action</option>
+            <option value="Adventure" selected="@(Model.Book.Type == "Adventure")">Adventure</option>
+            <option value="Biography" selected="@(Model.Book.Type == "Biography")">Biography</option>
+            <option value="Classic" selected="@(Model.Book.Type == "Classic")">Classic</option>
+            <option value="Comic" selected="@(Model.Book.Type == "Comic")">Comic</option>
+            <option value="Crime" selected="@(Model.Book.Type == "Crime")">Crime</option>
+            <option value="Drama" selected="@(Model.Book.Type == "Drama")">Drama</option>
+            <option value="Fantasy" selected="@(Model.Book.Type == "Fantasy")">Fantasy</option>
+            <option value="Historical" selected="@(Model.Book.Type == "Historical")">Historical</option>
+            <option value="Horror" selected="@(Model.Book.Type == "Horror")">Horror</option>
+            <option value="Mystery" selected="@(Model.Book.Type == "Mystery")">Mystery</option>
+            <option value="Romance" selected="@(Model.Book.Type == "Romance")">Romance</option>
+            <option value="Sci-Fi" selected="@(Model.Book.Type == "Sci-Fi")">Sci-Fi</option>
+            <option value="Thriller" selected="@(Model.Book.Type == "Thriller")">Thriller</option>
+            <option value="Western" selected="@(Model.Book.Type == "Western")">Western</option>
+            <option value="Other" selected="@(Model.Book.Type == "Other")">Other</option>
+
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="grade">Grade:</label>
+        <select class="form-control" id="grade" name="Book.Grade">
+            <option value="1" selected="@(Model.Book.Grade == 1)">1</option>
+            <option value="2" selected="@(Model.Book.Grade == 2)">2</option>
+            <option value="3" selected="@(Model.Book.Grade == 3)">3</option>
+            <option value="4" selected="@(Model.Book.Grade == 4)">4</option>
+            <option value="5" selected="@(Model.Book.Grade == 5)">5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+<textarea class="form-control" id="description" name="Book.Description" rows="5">@Model.Book.Description</textarea>
+</div>
+	<button type="submit" class="btn btn-primary">Save</button>
+</form>
