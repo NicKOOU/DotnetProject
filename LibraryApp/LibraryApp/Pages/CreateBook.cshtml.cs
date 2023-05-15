@@ -24,7 +24,7 @@ namespace LibraryApp.Pages
             {
                 return Page();
             }
-            
+
             _dbContext.Books.Add(Book);
             _dbContext.SaveChanges();
 

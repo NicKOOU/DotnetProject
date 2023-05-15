@@ -15,6 +15,9 @@ namespace LibraryApp.Pages
         [BindProperty]
         public Book Book { get; set; }
 
+        [BindProperty]
+        public bool IsRead { get; set; }
+
         public EditBookModel(MyDbContext dbContext)
         {
             _dbContext = dbContext;

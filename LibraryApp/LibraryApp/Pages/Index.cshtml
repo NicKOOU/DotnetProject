@@ -38,6 +38,33 @@
         color: gold;
     }
 
+    .recommendation-section {
+        margin: 1rem auto;
+        padding: 1.5rem 2rem;
+        position: relative;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 400;
+        background: rgba(140, 168, 216, 0.9);
+        color: white;
+        width: 600px;
+        text-align: center;
+    }
+
+
+    .book-details {
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
 
 </style>
 
@@ -121,6 +148,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Filter</button>
+    <a class="btn btn-secondary" href="/Index">Clear Filters</a>
 </form>
 
 <h1>Books</h1>
@@ -134,7 +162,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Read</th>
-            <th>Photo</th>
+            <th>Link</th>
             <th>Year</th>
             <th>Language</th>
             <th>Type</th>
@@ -154,22 +182,34 @@
                 <td>
                     @if (!string.IsNullOrEmpty(book.PhotoUrl))
                     {
-                        <img src="@book.PhotoUrl" alt="Book Photo" style="max-height: 50px; max-width: 50px;" />
+                        <a href="@book.PhotoUrl" target="_blank">
+                            <img src="/images/link.png" alt="Book Photo" style="max-height: 25px; max-width: 25px;" />
+                        </a>
                     }
                 </td>
+
                 <td>@(book.Year.HasValue ? book.Year.ToString() : "")</td>
                 <td>@book.Language</td>
                 <td>@book.Type</td>
                 <td>
-                    @if (book.Grade.HasValue)
+                    @if (book.Grade.HasValue && book.Grade == 0)
                     {
-                        <div class="rating">
+                            <a href="/EditBook?id=@book.Id" target="_blank">
+                                <img src="/images/review.png" alt="Book Photo" style="max-height: 25px; max-width: 25px;" />
+                            </a>
+                        
+                    }
+                    @if (book.Grade.HasValue && book.Grade > 0)
+                    {
+                    <div class="rating">
                             @for (int i = 1; i <= 5; i++)
                             {
                                 <span class="fa fa-star@(i <= book.Grade ? " checked" : "")"></span>
                             }
                         </div>
+                        
                     }
+                    
                 </td>
 
 
@@ -182,12 +222,12 @@
 
                 </td>
                 <td>
+                    <a class="btn btn-primary" href="EditBook?id=@book.Id">Edit</a>
+                </td>
+                <td>
                     <form method="post" asp-page-handler="Delete" asp-route-id="@book.Id">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="EditBook?id=@book.Id">Edit</a>
                 </td>
             </tr>
         }
@@ -196,3 +236,23 @@
 
     </tbody>
 </table>
+@if (Model.Books.Count > 0)
+{
+
+    var random = new Random();
+    var unreadBooks = Model.Books.Where(book => !book.IsRead).ToList();
+
+    if (unreadBooks.Count > 0)
+    {
+        var recommendationIndex = random.Next(0, unreadBooks.Count);
+        var recommendedBook = unreadBooks[recommendationIndex];
+        <div class="recommendation-section">
+            <div class="book-details">
+                <h2>You can read <em>@recommendedBook.Title</em></h2>
+                <p>@recommendedBook.Type book, written by @recommendedBook.Author in @recommendedBook.Language</p>
+            </div>
+        </div>
+    }
+
+
+}
