@@ -15,6 +15,7 @@ FROM build AS publish
 RUN dotnet publish "LibraryApp.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+COPY ["LibraryApp/setup.sql", "/app/setup.sql"]
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "LibraryApp.dll"]

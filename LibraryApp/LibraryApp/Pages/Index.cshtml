@@ -14,23 +14,22 @@
     }
 
     table {
-        background-color: rgba(255, 255, 255, 0.9); /* Set a semi-transparent white background for the table */
+        background-color: rgba(255, 255, 255, 0.9);
     }
 
-        /* Customize the table styles as needed */
         table th {
-            background-color: #333; /* Set the background color of table headers */
-            color: black; /* Set the text color of table headers */
+            background-color: #333;
+            color: black;
         }
 
         table td {
-            background-color: #fff; /* Set the background color of table cells */
+            background-color: #fff;
             color:black;
         }
 
     .footer 
     {
-        background-color:white; /* Set the background color with some transparency */
+        background-color:white;
         color: black;
     }
 
@@ -65,6 +64,13 @@
       font-size: 16px;
       margin-bottom: 8px;
     }
+
+    .description_overflow_handle {
+        max-width: 200px;
+        max-height: 50px;
+        overflow: auto;
+    }
+    
 
 </style>
 
@@ -103,10 +109,16 @@
         <input type="text" class="form-control" id="authorFilter" placeholder="Author" name="AuthorFilter" value="@Model.AuthorFilter">
     </div>
 
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="readFilter" name="ReadFilter" @(Model.ReadFilter.HasValue && Model.ReadFilter.Value ? "checked" : "")>
-        <label class="form-check-label" for="readFilter">Read</label>
+    <div class="btn-group" role="group" aria-label="Read Filter">
+        <input type="radio" id="readFilterAll" name="ReadFilter" value="all" @(Model.ReadFilter == "all" ? "checked" : "")>
+        <label for="readFilterAll" style="margin-right: 10px;">All</label>
+        <input type="radio" id="readFilterRead" name="ReadFilter" value="read" @(Model.ReadFilter == "read" ? "checked" : "")>
+        <label for="readFilterRead" style="margin-right: 10px;">Read</label>
+        <input type="radio" id="readFilterNotRead" name="ReadFilter" value="not-read" @(Model.ReadFilter == "not-read" ? "checked" : "")>
+        <label for="readFilterNotRead">Not Read</label>
     </div>
+
+
 
     <div class="form-group">
         <select class="form-control" id="languageFilter" name="LanguageFilter">
@@ -148,7 +160,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Filter</button>
-    <a class="btn btn-secondary" href="/Index">Clear Filters</a>
+    <a class="btn btn-secondary" style="margin: 10px;" href="/Index">Clear Filters</a>
 </form>
 
 <h1>Books</h1>
@@ -215,12 +227,16 @@
 
 
                 <td>
-                    @if(book.Description != null)
-					{
-						@book.Description
+                    @if (!string.IsNullOrEmpty(book.Description))
+                    {
+                            <div class="description_overflow_handle">
+                                @book.Description
+                            </div>
+                        
+                        
                     }
-
                 </td>
+
                 <td>
                     <a class="btn btn-primary" href="EditBook?id=@book.Id">Edit</a>
                 </td>
@@ -256,3 +272,11 @@
 
 
 }
+<script>
+    function updateReadFilter() {
+        var checkbox = document.getElementById('readFilter');
+        var readFilterValue = checkbox.checked;
+        document.getElementById('ReadFilter').value = readFilterValue ? "true" : "false";
+    }
+
+</script>

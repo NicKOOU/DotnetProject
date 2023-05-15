@@ -25,7 +25,9 @@ namespace WebApplication1.Pages
         public string AuthorFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public bool? ReadFilter { get; set; }
+        public string ReadFilter { get; set; }
+
+
 
         [BindProperty(SupportsGet = true)]
         public string LanguageFilter { get; set; }
@@ -58,13 +60,21 @@ namespace WebApplication1.Pages
             if (!string.IsNullOrEmpty(AuthorFilter))
                 query = query.Where(b => b.Author.Contains(AuthorFilter));
 
-            if (ReadFilter.HasValue)
-                query = query.Where(b => b.IsRead == ReadFilter);
+            if (!string.IsNullOrEmpty(ReadFilter))
+            {
+                if (ReadFilter == "read")
+                {
+                    query = query.Where(b => b.IsRead);
+                }
+                else if (ReadFilter == "not-read")
+                {
+                    query = query.Where(b => !b.IsRead);
+                }
+            }
 
             if (!string.IsNullOrEmpty(LanguageFilter))
                 query = query.Where(b => b.Language == LanguageFilter);
 
-            // Sort by grade
             if (SortBy == "Grade")
                 query = query.OrderByDescending(b => b.Grade);
 
