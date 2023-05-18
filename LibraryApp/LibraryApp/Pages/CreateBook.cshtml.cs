@@ -1,18 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LibraryApp.DataAccess.EfModels;
+using LibraryApp.DataAccess.Interfaces;
+using LibraryApp.Dbo;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Drawing.Printing;
 using System.IO;
 
 namespace LibraryApp.Pages
 {
     public class CreateBookModel : PageModel
     {
-        private readonly MyDbContext _dbContext;
+        private readonly ILogger<CreateBookModel> _logger;
+        private readonly IBookRepository _bookRepository;
 
-        public CreateBookModel(MyDbContext dbContext)
+        public CreateBookModel(ILogger<CreateBookModel> logger, IBookRepository bookRepository)
         {
-            _dbContext = dbContext;
+            _logger = logger;
+            _bookRepository = bookRepository;
         }
 
         [BindProperty]
@@ -24,9 +30,7 @@ namespace LibraryApp.Pages
             {
                 return Page();
             }
-
-            _dbContext.Books.Add(Book);
-            _dbContext.SaveChanges();
+            _bookRepository.Insert(Book);
 
             return RedirectToPage("Index");
         }

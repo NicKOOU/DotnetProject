@@ -1,5 +1,4 @@
 ﻿@page
-@using WebApplication1.Pages
 @model IndexModel
 @{
     ViewData["Title"] = "Books";
@@ -35,6 +34,10 @@
 
     .checked {
         color: gold;
+    }
+
+    .pages {
+        margin-right: 20px;
     }
 
     .recommendation-section {
@@ -73,7 +76,18 @@
     
 
 </style>
-
+<!-- A Menu bar to swap between 3 different pages -->
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+        <a class="btn btn-primary pages" href="/Index">Books</a>
+	</li>
+	<li class="nav-item">
+        <a class="btn btn-primary pages" href="ComicBook">ComicsBook</a>
+	</li>
+	<li class="nav-item">
+        <a class="btn btn-primary pages" href="CreateMovie">Movies</a>
+	</li>
+</ul>
 <form method="get" class="form-inline">
     <div class="form-group">
         <input type="text" class="form-control" id="titleFilter" placeholder="Title" name="TitleFilter" value="@Model.TitleFilter">
@@ -272,11 +286,3 @@
 
 
 }
-<script>
-    function updateReadFilter() {
-        var checkbox = document.getElementById('readFilter');
-        var readFilterValue = checkbox.checked;
-        document.getElementById('ReadFilter').value = readFilterValue ? "true" : "false";
-    }
-
-</script>

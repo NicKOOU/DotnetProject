@@ -1,16 +1,14 @@
-﻿using LibraryApp;
+﻿using LibraryApp.DataAccess.Interfaces;
+using LibraryApp.Dbo;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebApplication1.Pages
+namespace LibraryApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly MyDbContext _dbContext;
+        private readonly ILogger<IndexModel> _logger;
+        private readonly IBookRepository _bookRepository;
 
         [BindProperty(SupportsGet = true)]
         public string TitleFilter { get; set; }
@@ -37,63 +35,60 @@ namespace WebApplication1.Pages
 
         public List<Book> Books { get; set; }
 
-        public IndexModel(MyDbContext dbContext)
+        public IndexModel(ILogger<IndexModel> logger, IBookRepository bookRepository)
         {
-            _dbContext = dbContext;
+            _logger = logger;
+            _bookRepository = bookRepository;
             Books = new List<Book>();
         }
 
         public async Task<IActionResult> OnGet()
         {
-            var query = _dbContext.Books.AsQueryable();
+            List<Book> books = _bookRepository.Get().Result.ToList();
 
             // Apply filters
             if (!string.IsNullOrEmpty(TitleFilter))
-                query = query.Where(b => b.Title.Contains(TitleFilter));
+                books = books.FindAll(b => b.Title.Contains(TitleFilter));
 
             if (!string.IsNullOrEmpty(TypeFilter))
-                query = query.Where(b => b.Type == TypeFilter);
+                books = books.FindAll(b => b.Type == TypeFilter);
 
             if (YearFilter.HasValue)
-                query = query.Where(b => b.Year == YearFilter);
+                books = books.FindAll(b => b.Year == YearFilter);
 
             if (!string.IsNullOrEmpty(AuthorFilter))
-                query = query.Where(b => b.Author.Contains(AuthorFilter));
+                books = books.FindAll(b => b.Author.Contains(AuthorFilter));
 
             if (!string.IsNullOrEmpty(ReadFilter))
             {
                 if (ReadFilter == "read")
                 {
-                    query = query.Where(b => b.IsRead);
+                    books = books.FindAll(b => b.IsRead);
                 }
                 else if (ReadFilter == "not-read")
                 {
-                    query = query.Where(b => !b.IsRead);
+                    books = books.FindAll(b => !b.IsRead);
                 }
             }
 
             if (!string.IsNullOrEmpty(LanguageFilter))
-                query = query.Where(b => b.Language == LanguageFilter);
+                books = books.FindAll(b => b.Language == LanguageFilter);
 
-            if (SortBy == "Grade")
-                query = query.OrderByDescending(b => b.Grade);
-
-            Books = await query.ToListAsync();
+            Books = books;
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            var book = await _dbContext.Books.FindAsync(id);
+            var book = await _bookRepository.FindAsync(id);
 
             if (book == null)
             {
                 return NotFound();
             }
 
-            _dbContext.Books.Remove(book);
-            await _dbContext.SaveChangesAsync();
+            await _bookRepository.Delete(book.Id);
 
             return RedirectToPage();
         }

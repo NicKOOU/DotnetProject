@@ -1,3 +1,6 @@
+using LibraryApp.DataAccess.EfModels;
+using LibraryApp.DataAccess.Interfaces;
+using LibraryApp.Dbo;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +10,11 @@ namespace LibraryApp.Pages
 {
     public class EditBookModel : PageModel
     {
-        private readonly MyDbContext _dbContext;
+        private readonly ILogger<EditBookModel> _logger;
+        private readonly IBookRepository _bookRepository;
 
         [BindProperty]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [BindProperty]
         public Book Book { get; set; }
@@ -18,14 +22,15 @@ namespace LibraryApp.Pages
         [BindProperty]
         public bool IsRead { get; set; }
 
-        public EditBookModel(MyDbContext dbContext)
+        public EditBookModel(ILogger<EditBookModel> logger, IBookRepository bookRepository)
         {
-            _dbContext = dbContext;
+            _logger = logger;
+            _bookRepository = bookRepository;
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Book = await _dbContext.Books.FindAsync(id);
+            Book = await _bookRepository.FindAsync(id);
 
             if (Book == null)
             {
@@ -44,7 +49,7 @@ namespace LibraryApp.Pages
                 return Page();
             }
 
-            var existingBook = await _dbContext.Books.FindAsync(Id); // Use the stored ID
+            var existingBook = await _bookRepository.FindAsync(Id); // Use the stored ID
 
             if (existingBook == null)
             {
@@ -65,8 +70,7 @@ namespace LibraryApp.Pages
 
             try
             {
-                _dbContext.Entry(existingBook).State = EntityState.Modified;
-                await _dbContext.SaveChangesAsync();
+                await _bookRepository.Update(existingBook);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,9 +87,9 @@ namespace LibraryApp.Pages
             return RedirectToPage("./Index");
         }
 
-        private bool BookExists(int id)
+        private bool BookExists(long id)
         {
-            return _dbContext.Books.Any(e => e.Id == id);
+            return _bookRepository.FindAsync(id) != null;
         }
     }
 }

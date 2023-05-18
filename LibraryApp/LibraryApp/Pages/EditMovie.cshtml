@@ -1,0 +1,169 @@
+﻿@page
+@model EditMovieModel
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+<style>
+    body {
+        background-image: url("/images/choose-book.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-column {
+        flex-basis: 48%;
+    }
+
+    /* Add margin-bottom to create space between specific fields */
+    #title,
+    #year,
+    #iswatched,
+    #duration,
+    #language,
+    #grade {
+        margin-bottom: 20px;
+    }
+
+    #photo {
+        margin-bottom: 0px;
+    }
+
+    table {
+        background-color: rgba(255, 255, 255, 0.9); /* Set a semi-transparent white background for the table */
+    }
+
+        /* Customize the table styles as needed */
+        table th {
+            background-color: #333; /* Set the background color of table headers */
+            color: black; /* Set the text color of table headers */
+        }
+
+        table td {
+            background-color: #fff; /* Set the background color of table cells */
+            color: black;
+        }
+
+    .footer {
+        background-color: white; /* Set the background color with some transparency */
+        color: black;
+    }
+</style>
+
+<h1>Edit Movie</h1>
+
+<form method="post">
+    <div class="form-row">
+        <div class="form-column">
+            <div class="form-group">
+                <input class="form-control" type="text" id="title" name="Movie.Title" placeholder="Title" value="@Model.Movie.Title" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="number" id="duration" name="Movie.Duration" placeholder="Duration" value="@Model.Movie.Duration" required>
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="iswatched" name="Movie.IsWatched" value="true" @(Model.Movie.IsWatched ? "checked" : "") />
+                <label class="form-check-label" for="iswatched">Watched</label>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" id="image" name="Movie.PosterUrl" placeholder="Link (summary, blog)" value="@Model.Movie.PosterUrl">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-column">
+            <div class="form-group">
+                <input class="form-control" type="number" id="year" name="Movie.Year" placeholder="Year" value="@Model.Movie.Year">
+            </div>
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select class="form-control" id="language" name="Movie.Language">
+                    <option value="English" selected="@(Model.Movie.Language == "English")">English</option>
+                    <option value="Romanian" selected="@(Model.Movie.Language == "Romanian")">Romanian</option>
+                    <option value="French" selected="@(Model.Movie.Language == "French")">French</option>
+                    <option value="German" selected="@(Model.Movie.Language == "German")">German</option>
+                    <option value="Spanish" selected="@(Model.Movie.Language == "Spanish")">Spanish</option>
+                    <option value="Italian" selected="@(Model.Movie.Language == "Italian")">Italian</option>
+                    <option value="Russian" selected="@(Model.Movie.Language == "Russian")">Russian</option>
+                    <option value="Chinese" selected="@(Model.Movie.Language == "Chinese")">Chinese</option>
+                    <option value="Japanese" selected="@(Model.Movie.Language == "Japanese")">Japanese</option>
+                    <option value="Korean" selected="@(Model.Movie.Language == "Korean")">Korean</option>
+                    <option value="Arabic" selected="@(Model.Movie.Language == "Arabic")">Arabic</option>
+                    <option value="Turkish" selected="@(Model.Movie.Language == "Turkish")">Turkish</option>
+                    <option value="Postuguese" selected="@(Model.Movie.Language == "Postuguese")">Postuguese</option>
+                    <option value="Dutch" selected="@(Model.Movie.Language == "Dutch")">Dutch</option>
+                    <option value="Polish" selected="@(Model.Movie.Language == "Polish")">Polish</option>
+                    <option value="Swedish" selected="@(Model.Movie.Language == "Swedish")">Swedish</option>
+                    <option value="Norwegian" selected="@(Model.Movie.Language == "Norwegian")">Norwegian</option>
+                    <option value="Danish" selected="@(Model.Movie.Language == "Danish")">Danish</option>
+                    <option value="Finnish" selected="@(Model.Movie.Language == "Finnish")">Finnish</option>
+                    <option value="Greek" selected="@(Model.Movie.Language == "Greek")">Greek</option>
+                    <option value="Hindi" selected="@(Model.Movie.Language == "Hindi")">Hindi</option>
+                    <option value="Hungarian" selected="@(Model.Movie.Language == "Hungarian")">Hungarian</option>
+                    <option value="Indonesian" selected="@(Model.Movie.Language == "Indonesian")">Indonesian</option>
+                    <option value="Persian" selected="@(Model.Movie.Language == "Persian")">Persian</option>
+                    <option value="Thai" selected="@(Model.Movie.Language == "Thai")">Thai</option>
+                    <option value="Vietnamese" selected="@(Model.Movie.Language == "Vietnamese")">Vietnamese</option>
+                    <option value="Czech" selected="@(Model.Movie.Language == "Czech")">Czech</option>
+                    <option value="Ukrainian" selected="@(Model.Movie.Language == "Ukrainian")">Ukrainian</option>
+                    <option value="Croatian" selected="@(Model.Movie.Language == "Croatian")">Croatian</option>
+                    <option value="Catalan" selected="@(Model.Movie.Language == "Catalan")">Catalan</option>
+                    <option value="Bulgarian" selected="@(Model.Movie.Language == "Bulgarian")">Bulgarian</option>
+                    <option value="Slovak" selected="@(Model.Movie.Language == "Slovak")">Slovak</option>
+                    <option value="Lithuanian" selected="@(Model.Movie.Language == "Lithuanian")">Lithuanian</option>
+                    <option value="Other" selected="@(Model.Movie.Language == "Other")">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select class="form-control" id="genre" name="Movie.Genre">
+                    <option value="Action" selected="@(Model.Movie.Genre == "Action")">Action</option>
+                    <option value="Adventure" selected="@(Model.Movie.Genre == "Adventure")">Adventure</option>
+                    <option value="Biography" selected="@(Model.Movie.Genre == "Biography")">Biography</option>
+                    <option value="Classic" selected="@(Model.Movie.Genre == "Classic")">Classic</option>
+                    <option value="Comic" selected="@(Model.Movie.Genre == "Comic")">Comic</option>
+                    <option value="Crime" selected="@(Model.Movie.Genre == "Crime")">Crime</option>
+                    <option value="Drama" selected="@(Model.Movie.Genre == "Drama")">Drama</option>
+                    <option value="Fantasy" selected="@(Model.Movie.Genre == "Fantasy")">Fantasy</option>
+                    <option value="Historical" selected="@(Model.Movie.Genre == "Historical")">Historical</option>
+                    <option value="Horror" selected="@(Model.Movie.Genre == "Horror")">Horror</option>
+                    <option value="Mystery" selected="@(Model.Movie.Genre == "Mystery")">Mystery</option>
+                    <option value="Romance" selected="@(Model.Movie.Genre == "Romance")">Romance</option>
+                    <option value="Sci-Fi" selected="@(Model.Movie.Genre == "Sci-Fi")">Sci-Fi</option>
+                    <option value="Thriller" selected="@(Model.Movie.Genre == "Thriller")">Thriller</option>
+                    <option value="Western" selected="@(Model.Movie.Genre == "Western")">Western</option>
+                    <option value="Other" selected="@(Model.Movie.Genre == "Other")">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <select class="form-control" id="grade" name="Movie.Grade">
+                    <option value="0" selected="@(Model.Movie.Grade == 0)">Not Graded yet</option>
+                    <option value="1" selected="@(Model.Movie.Grade == 1)">1</option>
+                    <option value="2" selected="@(Model.Movie.Grade == 2)">2</option>
+                    <option value="3" selected="@(Model.Movie.Grade == 3)">3</option>
+                    <option value="4" selected="@(Model.Movie.Grade == 4)">4</option>
+                    <option value="5" selected="@(Model.Movie.Grade == 5)">5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" id="description" name="Movie.Description" placeholder="Descripton" rows="5">@Model.Movie.Description</textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <a href="/Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

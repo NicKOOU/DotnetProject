@@ -1,8 +1,8 @@
-﻿namespace LibraryApp
+﻿namespace LibraryApp.DataAccess.EfModels
 {
-    public class Book
+    public class TBook
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public bool IsRead { get; set; }

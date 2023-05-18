@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace LibraryApp
+namespace LibraryApp.DataAccess.EfModels
 {
-    public class MyDbContext : DbContext
+    public class LibraryAppContext : DbContext
     {
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        public LibraryAppContext(DbContextOptions<LibraryAppContext> options) : base(options)
         {
         }
 
@@ -14,6 +14,10 @@ namespace LibraryApp
             optionsBuilder.UseSqlServer(connectionString);
         }
 
-        public DbSet<Book> Books { get; set; }
+        public DbSet<TBook> Books { get; set; }
+
+        public DbSet<TMovie> Movies { get; set; }
+
+        public DbSet<TComicsBook> ComicsBook { get; set; }
     }
 }

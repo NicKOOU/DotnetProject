@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using LibraryApp.DataAccess.EfModels;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ namespace LibraryApp
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options =>
+            services.AddDbContext<LibraryAppContext>(options =>
                  options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                  );
             InitializeDatabase(services.BuildServiceProvider());
@@ -31,9 +32,10 @@ namespace LibraryApp
             if (environment.IsDevelopment())
             {
                 using var scope = serviceProvider.CreateScope();
-                var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+                var dbContext = scope.ServiceProvider.GetRequiredService<LibraryAppContext>();
 
                 //drop Database
+                dbContext.Database.EnsureDeleted();
                 dbContext.Database.EnsureCreated();
 
                 var setupSql = File.ReadAllText("setup.sql");

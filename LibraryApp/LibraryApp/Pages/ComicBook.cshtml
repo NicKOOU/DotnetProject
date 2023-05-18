@@ -1,0 +1,299 @@
+﻿@page
+@model ComicBook
+@{
+ViewData["Title"] = "Comic Book";
+}
+<style>
+    body {
+        background-image: url("/images/library-background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #fff;
+    }
+
+    table {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+        table th {
+            background-color: #333;
+            color: black;
+        }
+
+        table td {
+            background-color: #fff;
+            color: black;
+        }
+
+    .footer {
+        background-color: white;
+        color: black;
+    }
+
+    .checked {
+        color: gold;
+    }
+
+    .pages {
+        margin-right: 20px;
+    }
+
+    .recommendation-section {
+        margin: 1rem auto;
+        padding: 1.5rem 2rem;
+        position: relative;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 400;
+        background: rgba(140, 168, 216, 0.9);
+        color: white;
+        width: 600px;
+        text-align: center;
+    }
+
+
+    .book-details {
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .description_overflow_handle {
+        max-width: 200px;
+        max-height: 50px;
+        overflow: auto;
+    }
+</style>
+<!-- A Menu bar to swap between 3 different pages -->
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="btn btn-primary pages" href="/Index">Books</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-primary pages" href="ComicBook">ComicsBook</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-primary pages" href="CreateMovie">Movies</a>
+    </li>
+</ul>
+<form method="get" class="form-inline">
+    <div class="form-group">
+        <input type="text" class="form-control" id="titleFilter" placeholder="Title" name="TitleFilter" value="@Model.TitleFilter">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="brandFilter" placeholder="Brand" name="BrandFilter" value="@Model.BrandFilter">
+    </div>
+    <div class="form-group">
+        <select class="form-control" id="typeFilter" name="TypeFilter">
+            <option value="">All Types</option>
+            <option value="Action" selected="@(Model.TypeFilter == "Action")">Action</option>
+            <option value="Adventure" selected="@(Model.TypeFilter == "Adventure")">Adventure</option>
+            <option value="Biography" selected="@(Model.TypeFilter == "Biography")">Biography</option>
+            <option value="Classic" selected="@(Model.TypeFilter == "Classic")">Classic</option>
+            <option value="Comic" selected="@(Model.TypeFilter == "Comic")">Comic</option>
+            <option value="Crime" selected="@(Model.TypeFilter == "Crime")">Crime</option>
+            <option value="Drama" selected="@(Model.TypeFilter == "Drama")">Drama</option>
+            <option value="Fantasy" selected="@(Model.TypeFilter == "Fantasy")">Fantasy</option>
+            <option value="Historical" selected="@(Model.TypeFilter == "Historical")">Historical</option>
+            <option value="Horror" selected="@(Model.TypeFilter == "Horror")">Horror</option>
+            <option value="Mystery" selected="@(Model.TypeFilter == "Mystery")">Mystery</option>
+            <option value="Romance" selected="@(Model.TypeFilter == "Romance")">Romance</option>
+            <option value="Sci-Fi" selected="@(Model.TypeFilter == "Sci-Fi")">Sci-Fi</option>
+            <option value="Thriller" selected="@(Model.TypeFilter == "Thriller")">Thriller</option>
+            <option value="Western" selected="@(Model.TypeFilter == "Western")">Western</option>
+            <option value="Other" selected="@(Model.TypeFilter == "Wester")">Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="number" class="form-control" id="yearFilter" placeholder="Year" name="YearFilter" value="@Model.YearFilter">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" id="authorFilter" placeholder="Author" name="AuthorFilter" value="@Model.AuthorFilter">
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Read Filter">
+        <input type="radio" id="readFilterAll" name="ReadFilter" value="all" @(Model.ReadFilter == "all" ? "checked" : "")>
+        <label for="readFilterAll" style="margin-right: 10px;">All</label>
+        <input type="radio" id="readFilterRead" name="ReadFilter" value="read" @(Model.ReadFilter == "read" ? "checked" : "")>
+        <label for="readFilterRead" style="margin-right: 10px;">Read</label>
+        <input type="radio" id="readFilterNotRead" name="ReadFilter" value="not-read" @(Model.ReadFilter == "not-read" ? "checked" : "")>
+        <label for="readFilterNotRead">Not Read</label>
+    </div>
+    <div class="form-group">
+        <div class="btn-group" role="group" aria-label="Color Filter">
+            <input type="radio" id="colorFilterAll" name="ColorFilter" value="all" @(Model.ColorFilter == "all" ? "checked" : "")>
+            <label for="colorFilterAll" style="margin-right: 10px;">All</label>
+            <input type="radio" id="colorFilterColor" name="ColorFilter" value="color" @(Model.ColorFilter == "color" ? "checked" : "")>
+            <label for="colorFilterColor" style="margin-right: 10px;">Color</label>
+            <input type="radio" id="colorFilterNoColor" name="ColorFilter" value="no-color" @(Model.ColorFilter == "no-color" ? "checked" : "")>
+            <label for="colorFilterNoColor">No Color</label>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <select class="form-control" id="languageFilter" name="LanguageFilter">
+            <option value="">All Languages</option>
+            <option value="English" selected="@(Model.LanguageFilter == "English")">English</option>
+            <option value="Romanian" selected="@(Model.LanguageFilter == "Romanian")">Romanian</option>
+            <option value="French" selected="@(Model.LanguageFilter == "French")">French</option>
+            <option value="German" selected="@(Model.LanguageFilter == "German")">German</option>
+            <option value="Spanish" selected="@(Model.LanguageFilter == "Spanish")">Spanish</option>
+            <option value="Italian" selected="@(Model.LanguageFilter == "Italian")">Italian</option>
+            <option value="Russian" selected="@(Model.LanguageFilter == "Russian")">Russian</option>
+            <option value="Chinese" selected="@(Model.LanguageFilter == "Chinese")">Chinese</option>
+            <option value="Japanese" selected="@(Model.LanguageFilter == "Japanese")">Japanese</option>
+            <option value="Korean" selected="@(Model.LanguageFilter == "Korean")">Korean</option>
+            <option value="Arabic" selected="@(Model.LanguageFilter == "Arabic")">Arabic</option>
+            <option value="Hindi" selected="@(Model.LanguageFilter == "Hindi")">Hindi</option>
+            <option value="Turkish" selected="@(Model.LanguageFilter == "Turkish")">Turkish</option>
+            <option value="Portuguese" selected="@(Model.LanguageFilter == "Portuguese")">Portuguese</option>
+            <option value="Swedish" selected="@(Model.LanguageFilter == "Swedish")">Swedish</option>
+            <option value="Dutch" selected="@(Model.LanguageFilter == "Dutch")">Dutch</option>
+            <option value="Polish" selected="@(Model.LanguageFilter == "Polish")">Polish</option>
+            <option value="Greek" selected="@(Model.LanguageFilter == "Greek")">Greek</option>
+            <option value="Norwegian" selected="@(Model.LanguageFilter == "Norwegian")">Norwegian</option>
+            <option value="Danish" selected="@(Model.LanguageFilter == "Danish")">Danish</option>
+            <option value="Finnish" selected="@(Model.LanguageFilter == "Finnish")">Finnish</option>
+            <option value="Hungarian" selected="@(Model.LanguageFilter == "Hungarian")">Hungarian</option>
+            <option value="Czech" selected="@(Model.LanguageFilter == "Czech")">Czech</option>
+            <option value="Bulgarian" selected="@(Model.LanguageFilter == "Bulgarian")">Bulgarian</option>
+            <option value="Croatian" selected="@(Model.LanguageFilter == "Croatian")">Croatian</option>
+            <option value="Ukrainian" selected="@(Model.LanguageFilter == "Ukrainian")">Ukrainian</option>
+            <option value="Hebrew" selected="@(Model.LanguageFilter == "Hebrew")">Hebrew</option>
+            <option value="Indonesian" selected="@(Model.LanguageFilter == "Indonesian")">Indonesian</option>
+            <option value="Persian" selected="@(Model.LanguageFilter == "Persian")">Persian</option>
+            <option value="Thai" selected="@(Model.LanguageFilter == "Thai")">Thai</option>
+            <option value="Romanian" selected="@(Model.LanguageFilter == "Romanian")">Romanian</option>
+            <option value="Other" selected="@(Model.LanguageFilter == "Other")">Other</option>
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a class="btn btn-secondary" style="margin: 10px;" href="/Index">Clear Filters</a>
+</form>
+
+<h1>Comics Books</h1>
+
+<a class="btn btn-primary" href="CreateComicBook">Add Comic</a>
+
+<table class="table">
+    <thead>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Brand</th>
+            <th>Read</th>
+            <th>Color</th>
+            <th>Link</th>
+            <th>Year</th>
+            <th>Language</th>
+            <th>Type</th>
+            <th>Grade</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comicsbook in Model.comicsBooks)
+        {
+            <tr>
+                <td>@comicsbook.Title</td>
+                <td>@comicsbook.Author</td>
+                <td>@comicsbook.Brand</td>
+                <td>@(comicsbook.IsRead ? "Yes" : "No")</td>
+                <td>@(comicsbook.IsColor ? "Yes" : "No")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(comicsbook.PhotoUrl))
+                    {
+                        <a href="@comicsbook.PhotoUrl" target="_blank">
+                            <img src="/images/link.png" alt="Comic Book Photo" style="max-height: 25px; max-width: 25px;" />
+                        </a>
+                    }
+                </td>
+
+                <td>@(comicsbook.Year.HasValue ? comicsbook.Year.ToString() : "")</td>
+                <td>@comicsbook.Language</td>
+                <td>@comicsbook.Type</td>
+                <td>
+                    @if (comicsbook.Grade.HasValue && comicsbook.Grade == 0)
+                    {
+                        <a href="/EditComicBook?id=@comicsbook.Id" target="_blank">
+                            <img src="/images/review.png" alt="Book Photo" style="max-height: 25px; max-width: 25px;" />
+                        </a>
+
+                    }
+                    @if (comicsbook.Grade.HasValue && comicsbook.Grade > 0)
+                    {
+                        <div class="rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="fa fa-star@(i <= comicsbook.Grade ? " checked" : "")"></span>
+                            }
+                        </div>
+
+                    }
+
+                </td>
+
+
+
+                <td>
+                    @if (!string.IsNullOrEmpty(comicsbook.Description))
+                    {
+                        <div class="description_overflow_handle">
+                            @comicsbook.Description
+                        </div>
+
+
+                    }
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" href="EditComicBook?id=@comicsbook.Id">Edit</a>
+                </td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@comicsbook.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+
+    </tbody>
+</table>
+@if (Model.comicsBooks.Count > 0)
+{
+
+    var random = new Random();
+    var unreadBooks = Model.comicsBooks.Where(book => !book.IsRead).ToList();
+
+    if (unreadBooks.Count > 0)
+    {
+        var recommendationIndex = random.Next(0, unreadBooks.Count);
+        var recommendedBook = unreadBooks[recommendationIndex];
+        <div class="recommendation-section">
+            <div class="book-details">
+                <h2>You can read <em>@recommendedBook.Title</em></h2>
+                <p>@recommendedBook.Type book, written by @recommendedBook.Author in @recommendedBook.Language</p>
+            </div>
+        </div>
+    }
+
+
+}

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApp", "LibraryApp\Li
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2B8B2319-615A-464D-A8AA-A0FD06BBC0F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryTests", "LibraryTests\LibraryTests.csproj", "{31FB7CC3-498D-40D2-94AB-CCFBF776D3D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryTests", "LibraryTests\LibraryTests.csproj", "{31FB7CC3-498D-40D2-94AB-CCFBF776D3D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
