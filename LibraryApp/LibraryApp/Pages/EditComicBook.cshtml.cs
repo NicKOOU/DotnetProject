@@ -15,13 +15,13 @@ namespace LibraryApp.Pages
         public int Id { get; set; }
 
         [BindProperty]
-        public ComicsBook comicsBook { get; set; }
+        public ComicsBook ComicsBook { get; set; }
 
         [BindProperty]
         public bool IsRead { get; set; }
 
         [BindProperty]
-        public Book IsColor { get; set; }
+        public bool IsColor { get; set; }
 
         public EditComicBookModel(ILogger<EditComicBookModel> logger, IComicsBookRepository comicsBookRepository)
         {
@@ -31,9 +31,9 @@ namespace LibraryApp.Pages
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            comicsBook = await _comicsBookRepository.FindAsync(id);
+            ComicsBook = await _comicsBookRepository.FindAsync(id);
 
-            if (comicsBook == null)
+            if (ComicsBook == null)
             {
                 return NotFound();
             }
@@ -58,17 +58,17 @@ namespace LibraryApp.Pages
             }
 
             // Update the properties of the existing book with the new values
-            existingComics.Title = comicsBook.Title;
-            existingComics.Author = comicsBook.Author;
-            existingComics.Year = comicsBook.Year;
-            existingComics.Brand = comicsBook.Brand;
-            existingComics.IsRead = comicsBook.IsRead;
-            existingComics.IsColor = comicsBook.IsColor;
-            existingComics.Description = comicsBook.Description;
-            existingComics.Grade = comicsBook.Grade;
-            existingComics.Language = comicsBook.Language;
-            existingComics.PhotoUrl = comicsBook.PhotoUrl;
-            existingComics.Type = comicsBook.Type;
+            existingComics.Title = ComicsBook.Title;
+            existingComics.Author = ComicsBook.Author;
+            existingComics.Year = ComicsBook.Year;
+            existingComics.Brand = ComicsBook.Brand;
+            existingComics.IsRead = ComicsBook.IsRead;
+            existingComics.IsColor = ComicsBook.IsColor;
+            existingComics.Description = ComicsBook.Description;
+            existingComics.Grade = ComicsBook.Grade;
+            existingComics.Language = ComicsBook.Language;
+            existingComics.PhotoUrl = ComicsBook.PhotoUrl;
+            existingComics.Type = ComicsBook.Type;
             // Update other book properties here
 
             try

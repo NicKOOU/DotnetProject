@@ -1,5 +1,5 @@
 ﻿@page
-@model EditComicBookModel
+@model LibraryApp.Pages.EditComicBookModel
 @{
 	ViewData["Title"] = "Edit Comic Book";
 }
@@ -64,119 +64,119 @@
     }
 </style>
 
-<h1>Edit comicsBook</h1>
+<h1>Edit Comic Book</h1>
 
 <form method="post">
     <div class="form-row">
         <div class="form-column">
             <div class="form-group">
-                <input class="form-control" type="text" id="title" name="comicsBook.Title" placeholder="Title" value="@Model.comicsBook.Title" required>
+                <input class="form-control" type="text" id="title" name="ComicsBook.Title" placeholder="Title" value="@Model.ComicsBook.Title" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" id="author" name="comicsBook.Author" placeholder="Author" value="@Model.comicsBook.Author" required>
+                <input class="form-control" type="text" id="author" name="ComicsBook.Author" placeholder="Author" value="@Model.ComicsBook.Author" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" id="brand" name="comicsBook.Brand" placeholder="Brand" value="@Model.comicsBook.Brand" required />
+                <input class="form-control" type="text" id="brand" name="ComicsBook.Brand" placeholder="Brand" value="@Model.ComicsBook.Brand" required>
             </div>
         </div>
         <div class="form-column">
             <div class="form-row-no-space">
                 <div class="form-check" id="read">
-                    <input class="form-check-input" type="checkbox" id="isread" name="comicsBook.IsRead" value="true" @(Model.comicsBook.IsRead ? "checked" : "") />
+                    <input class="form-check-input" type="checkbox" id="isread" name="ComicsBook.IsRead" value="true" @(Model.ComicsBook.IsRead ? "checked" : "") />
                     <label class="form-check-label" for="isread">Read</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="iscolor" name="comicsBook.IsColor" value="true" @(Model.comicsBook.IsColor ? "checked" : "")>
+                    <input class="form-check-input" type="checkbox" id="iscolor" name="ComicsBook.IsColor" value="true" @(Model.ComicsBook.IsColor ? "checked" : "")/>
                     <label class="form-check-label" for="iscolor">Color</label>
                 </div>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" id="image" name="comicsBook.PhotoUrl" placeholder="Link (summary, blog)" value="@Model.comicsBook.PhotoUrl">
+                <input class="form-control" type="text" id="image" name="ComicsBook.PhotoUrl" placeholder="Link (summary, blog)" value="@Model.ComicsBook.PhotoUrl">
             </div>
         </div>
     </div>
     <div class="form-row">
         <div class="form-column">
             <div class="form-group">
-                <input class="form-control" type="number" id="year" name="comicsBook.Year" placeholder="Year" value="@Model.comicsBook.Year">
+                <input class="form-control" type="number" id="year" name="ComicsBook.Year" placeholder="Year" value="@Model.ComicsBook.Year">
             </div>
             <div class="form-group">
                 <label for="language">Language:</label>
-                <select class="form-control" id="language" name="comicsBook.Language">
-                    <option value="English" selected="@(Model.comicsBook.Language == "English")">English</option>
-                    <option value="Romanian" selected="@(Model.comicsBook.Language == "Romanian")">Romanian</option>
-                    <option value="French" selected="@(Model.comicsBook.Language == "French")">French</option>
-                    <option value="German" selected="@(Model.comicsBook.Language == "German")">German</option>
-                    <option value="Spanish" selected="@(Model.comicsBook.Language == "Spanish")">Spanish</option>
-                    <option value="Italian" selected="@(Model.comicsBook.Language == "Italian")">Italian</option>
-                    <option value="Russian" selected="@(Model.comicsBook.Language == "Russian")">Russian</option>
-                    <option value="Chinese" selected="@(Model.comicsBook.Language == "Chinese")">Chinese</option>
-                    <option value="Japanese" selected="@(Model.comicsBook.Language == "Japanese")">Japanese</option>
-                    <option value="Korean" selected="@(Model.comicsBook.Language == "Korean")">Korean</option>
-                    <option value="Arabic" selected="@(Model.comicsBook.Language == "Arabic")">Arabic</option>
-                    <option value="Turkish" selected="@(Model.comicsBook.Language == "Turkish")">Turkish</option>
-                    <option value="Postuguese" selected="@(Model.comicsBook.Language == "Postuguese")">Postuguese</option>
-                    <option value="Dutch" selected="@(Model.comicsBook.Language == "Dutch")">Dutch</option>
-                    <option value="Polish" selected="@(Model.comicsBook.Language == "Polish")">Polish</option>
-                    <option value="Swedish" selected="@(Model.comicsBook.Language == "Swedish")">Swedish</option>
-                    <option value="Norwegian" selected="@(Model.comicsBook.Language == "Norwegian")">Norwegian</option>
-                    <option value="Danish" selected="@(Model.comicsBook.Language == "Danish")">Danish</option>
-                    <option value="Finnish" selected="@(Model.comicsBook.Language == "Finnish")">Finnish</option>
-                    <option value="Greek" selected="@(Model.comicsBook.Language == "Greek")">Greek</option>
-                    <option value="Hindi" selected="@(Model.comicsBook.Language == "Hindi")">Hindi</option>
-                    <option value="Hungarian" selected="@(Model.comicsBook.Language == "Hungarian")">Hungarian</option>
-                    <option value="Indonesian" selected="@(Model.comicsBook.Language == "Indonesian")">Indonesian</option>
-                    <option value="Persian" selected="@(Model.comicsBook.Language == "Persian")">Persian</option>
-                    <option value="Thai" selected="@(Model.comicsBook.Language == "Thai")">Thai</option>
-                    <option value="Vietnamese" selected="@(Model.comicsBook.Language == "Vietnamese")">Vietnamese</option>
-                    <option value="Czech" selected="@(Model.comicsBook.Language == "Czech")">Czech</option>
-                    <option value="Ukrainian" selected="@(Model.comicsBook.Language == "Ukrainian")">Ukrainian</option>
-                    <option value="Croatian" selected="@(Model.comicsBook.Language == "Croatian")">Croatian</option>
-                    <option value="Catalan" selected="@(Model.comicsBook.Language == "Catalan")">Catalan</option>
-                    <option value="Bulgarian" selected="@(Model.comicsBook.Language == "Bulgarian")">Bulgarian</option>
-                    <option value="Slovak" selected="@(Model.comicsBook.Language == "Slovak")">Slovak</option>
-                    <option value="Lithuanian" selected="@(Model.comicsBook.Language == "Lithuanian")">Lithuanian</option>
-                    <option value="Other" selected="@(Model.comicsBook.Language == "Other")">Other</option>
+                <select class="form-control" id="language" name="ComicsBook.Language">
+                    <option value="English" selected="@(Model.ComicsBook.Language == "English")">English</option>
+                    <option value="Romanian" selected="@(Model.ComicsBook.Language == "Romanian")">Romanian</option>
+                    <option value="French" selected="@(Model.ComicsBook.Language == "French")">French</option>
+                    <option value="German" selected="@(Model.ComicsBook.Language == "German")">German</option>
+                    <option value="Spanish" selected="@(Model.ComicsBook.Language == "Spanish")">Spanish</option>
+                    <option value="Italian" selected="@(Model.ComicsBook.Language == "Italian")">Italian</option>
+                    <option value="Russian" selected="@(Model.ComicsBook.Language == "Russian")">Russian</option>
+                    <option value="Chinese" selected="@(Model.ComicsBook.Language == "Chinese")">Chinese</option>
+                    <option value="Japanese" selected="@(Model.ComicsBook.Language == "Japanese")">Japanese</option>
+                    <option value="Korean" selected="@(Model.ComicsBook.Language == "Korean")">Korean</option>
+                    <option value="Arabic" selected="@(Model.ComicsBook.Language == "Arabic")">Arabic</option>
+                    <option value="Turkish" selected="@(Model.ComicsBook.Language == "Turkish")">Turkish</option>
+                    <option value="Postuguese" selected="@(Model.ComicsBook.Language == "Postuguese")">Postuguese</option>
+                    <option value="Dutch" selected="@(Model.ComicsBook.Language == "Dutch")">Dutch</option>
+                    <option value="Polish" selected="@(Model.ComicsBook.Language == "Polish")">Polish</option>
+                    <option value="Swedish" selected="@(Model.ComicsBook.Language == "Swedish")">Swedish</option>
+                    <option value="Norwegian" selected="@(Model.ComicsBook.Language == "Norwegian")">Norwegian</option>
+                    <option value="Danish" selected="@(Model.ComicsBook.Language == "Danish")">Danish</option>
+                    <option value="Finnish" selected="@(Model.ComicsBook.Language == "Finnish")">Finnish</option>
+                    <option value="Greek" selected="@(Model.ComicsBook.Language == "Greek")">Greek</option>
+                    <option value="Hindi" selected="@(Model.ComicsBook.Language == "Hindi")">Hindi</option>
+                    <option value="Hungarian" selected="@(Model.ComicsBook.Language == "Hungarian")">Hungarian</option>
+                    <option value="Indonesian" selected="@(Model.ComicsBook.Language == "Indonesian")">Indonesian</option>
+                    <option value="Persian" selected="@(Model.ComicsBook.Language == "Persian")">Persian</option>
+                    <option value="Thai" selected="@(Model.ComicsBook.Language == "Thai")">Thai</option>
+                    <option value="Vietnamese" selected="@(Model.ComicsBook.Language == "Vietnamese")">Vietnamese</option>
+                    <option value="Czech" selected="@(Model.ComicsBook.Language == "Czech")">Czech</option>
+                    <option value="Ukrainian" selected="@(Model.ComicsBook.Language == "Ukrainian")">Ukrainian</option>
+                    <option value="Croatian" selected="@(Model.ComicsBook.Language == "Croatian")">Croatian</option>
+                    <option value="Catalan" selected="@(Model.ComicsBook.Language == "Catalan")">Catalan</option>
+                    <option value="Bulgarian" selected="@(Model.ComicsBook.Language == "Bulgarian")">Bulgarian</option>
+                    <option value="Slovak" selected="@(Model.ComicsBook.Language == "Slovak")">Slovak</option>
+                    <option value="Lithuanian" selected="@(Model.ComicsBook.Language == "Lithuanian")">Lithuanian</option>
+                    <option value="Other" selected="@(Model.ComicsBook.Language == "Other")">Other</option>
                 </select>
             </div>
         </div>
         <div class="form-column">
             <div class="form-group">
                 <label for="type">Type:</label>
-                <select class="form-control" id="type" name="comicsBook.Type">
-                    <option value="Action" selected="@(Model.comicsBook.Type == "Action")">Action</option>
-                    <option value="Adventure" selected="@(Model.comicsBook.Type == "Adventure")">Adventure</option>
-                    <option value="Biography" selected="@(Model.comicsBook.Type == "Biography")">Biography</option>
-                    <option value="Classic" selected="@(Model.comicsBook.Type == "Classic")">Classic</option>
-                    <option value="Comic" selected="@(Model.comicsBook.Type == "Comic")">Comic</option>
-                    <option value="Crime" selected="@(Model.comicsBook.Type == "Crime")">Crime</option>
-                    <option value="Drama" selected="@(Model.comicsBook.Type == "Drama")">Drama</option>
-                    <option value="Fantasy" selected="@(Model.comicsBook.Type == "Fantasy")">Fantasy</option>
-                    <option value="Historical" selected="@(Model.comicsBook.Type == "Historical")">Historical</option>
-                    <option value="Horror" selected="@(Model.comicsBook.Type == "Horror")">Horror</option>
-                    <option value="Mystery" selected="@(Model.comicsBook.Type == "Mystery")">Mystery</option>
-                    <option value="Romance" selected="@(Model.comicsBook.Type == "Romance")">Romance</option>
-                    <option value="Sci-Fi" selected="@(Model.comicsBook.Type == "Sci-Fi")">Sci-Fi</option>
-                    <option value="Thriller" selected="@(Model.comicsBook.Type == "Thriller")">Thriller</option>
-                    <option value="Western" selected="@(Model.comicsBook.Type == "Western")">Western</option>
-                    <option value="Other" selected="@(Model.comicsBook.Type == "Other")">Other</option>
+                <select class="form-control" id="type" name="ComicsBook.Type">
+                    <option value="Action" selected="@(Model.ComicsBook.Type == "Action")">Action</option>
+                    <option value="Adventure" selected="@(Model.ComicsBook.Type == "Adventure")">Adventure</option>
+                    <option value="Biography" selected="@(Model.ComicsBook.Type == "Biography")">Biography</option>
+                    <option value="Classic" selected="@(Model.ComicsBook.Type == "Classic")">Classic</option>
+                    <option value="Comic" selected="@(Model.ComicsBook.Type == "Comic")">Comic</option>
+                    <option value="Crime" selected="@(Model.ComicsBook.Type == "Crime")">Crime</option>
+                    <option value="Drama" selected="@(Model.ComicsBook.Type == "Drama")">Drama</option>
+                    <option value="Fantasy" selected="@(Model.ComicsBook.Type == "Fantasy")">Fantasy</option>
+                    <option value="Historical" selected="@(Model.ComicsBook.Type == "Historical")">Historical</option>
+                    <option value="Horror" selected="@(Model.ComicsBook.Type == "Horror")">Horror</option>
+                    <option value="Mystery" selected="@(Model.ComicsBook.Type == "Mystery")">Mystery</option>
+                    <option value="Romance" selected="@(Model.ComicsBook.Type == "Romance")">Romance</option>
+                    <option value="Sci-Fi" selected="@(Model.ComicsBook.Type == "Sci-Fi")">Sci-Fi</option>
+                    <option value="Thriller" selected="@(Model.ComicsBook.Type == "Thriller")">Thriller</option>
+                    <option value="Western" selected="@(Model.ComicsBook.Type == "Western")">Western</option>
+                    <option value="Other" selected="@(Model.ComicsBook.Type == "Other")">Other</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="grade">Grade:</label>
-                <select class="form-control" id="grade" name="comicsBook.Grade">
-                    <option value="0" selected="@(Model.comicsBook.Grade == 0)">Not Graded yet</option>
-                    <option value="1" selected="@(Model.comicsBook.Grade == 1)">1</option>
-                    <option value="2" selected="@(Model.comicsBook.Grade == 2)">2</option>
-                    <option value="3" selected="@(Model.comicsBook.Grade == 3)">3</option>
-                    <option value="4" selected="@(Model.comicsBook.Grade == 4)">4</option>
-                    <option value="5" selected="@(Model.comicsBook.Grade == 5)">5</option>
+                <select class="form-control" id="grade" name="ComicsBook.Grade">
+                    <option value="0" selected="@(Model.ComicsBook.Grade == 0)">Not Graded yet</option>
+                    <option value="1" selected="@(Model.ComicsBook.Grade == 1)">1</option>
+                    <option value="2" selected="@(Model.ComicsBook.Grade == 2)">2</option>
+                    <option value="3" selected="@(Model.ComicsBook.Grade == 3)">3</option>
+                    <option value="4" selected="@(Model.ComicsBook.Grade == 4)">4</option>
+                    <option value="5" selected="@(Model.ComicsBook.Grade == 5)">5</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <textarea class="form-control" id="description" name="comicsBook.Description" placeholder="Descripton" rows="5">@Model.comicsBook.Description</textarea>
+        <textarea class="form-control" id="description" name="ComicsBook.Description" placeholder="Descripton" rows="5">@Model.ComicsBook.Description</textarea>
     </div>
 
     <div class="form-group">

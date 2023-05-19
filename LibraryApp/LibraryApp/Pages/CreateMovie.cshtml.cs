@@ -27,7 +27,7 @@ namespace LibraryApp.Pages
             }
             _movieRepository.Insert(Movie);
 
-            return RedirectToPage("Index");
+            return RedirectToPage("Movie");
         }
     }
 }

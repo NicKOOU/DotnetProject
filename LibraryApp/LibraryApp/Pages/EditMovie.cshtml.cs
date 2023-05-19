@@ -81,7 +81,7 @@ namespace LibraryApp.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Movie");
         }
 
         private bool MovieExists(int id)

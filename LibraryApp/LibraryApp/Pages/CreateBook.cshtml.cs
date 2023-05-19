@@ -32,7 +32,7 @@ namespace LibraryApp.Pages
             }
             _bookRepository.Insert(Book);
 
-            return RedirectToPage("Index");
+            return RedirectToPage("Book");
         }
     }
 }

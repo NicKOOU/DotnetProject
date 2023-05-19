@@ -1,7 +1,7 @@
 ﻿@page
-@model ComicBook
+@model LibraryApp.Pages.MovieModel
 @{
-ViewData["Title"] = "Comic Book";
+    ViewData["Title"] = "Movies";
 }
 <style>
     body {
@@ -88,28 +88,26 @@ ViewData["Title"] = "Comic Book";
     <div class="form-group">
         <input type="text" class="form-control" id="titleFilter" placeholder="Title" name="TitleFilter" value="@Model.TitleFilter">
     </div>
+
     <div class="form-group">
-        <input type="text" class="form-control" id="brandFilter" placeholder="Brand" name="BrandFilter" value="@Model.BrandFilter">
-    </div>
-    <div class="form-group">
-        <select class="form-control" id="typeFilter" name="TypeFilter">
+        <select class="form-control" id="genreFilter" name="GenreFilter">
             <option value="">All Types</option>
-            <option value="Action" selected="@(Model.TypeFilter == "Action")">Action</option>
-            <option value="Adventure" selected="@(Model.TypeFilter == "Adventure")">Adventure</option>
-            <option value="Biography" selected="@(Model.TypeFilter == "Biography")">Biography</option>
-            <option value="Classic" selected="@(Model.TypeFilter == "Classic")">Classic</option>
-            <option value="Comic" selected="@(Model.TypeFilter == "Comic")">Comic</option>
-            <option value="Crime" selected="@(Model.TypeFilter == "Crime")">Crime</option>
-            <option value="Drama" selected="@(Model.TypeFilter == "Drama")">Drama</option>
-            <option value="Fantasy" selected="@(Model.TypeFilter == "Fantasy")">Fantasy</option>
-            <option value="Historical" selected="@(Model.TypeFilter == "Historical")">Historical</option>
-            <option value="Horror" selected="@(Model.TypeFilter == "Horror")">Horror</option>
-            <option value="Mystery" selected="@(Model.TypeFilter == "Mystery")">Mystery</option>
-            <option value="Romance" selected="@(Model.TypeFilter == "Romance")">Romance</option>
-            <option value="Sci-Fi" selected="@(Model.TypeFilter == "Sci-Fi")">Sci-Fi</option>
-            <option value="Thriller" selected="@(Model.TypeFilter == "Thriller")">Thriller</option>
-            <option value="Western" selected="@(Model.TypeFilter == "Western")">Western</option>
-            <option value="Other" selected="@(Model.TypeFilter == "Wester")">Other</option>
+            <option value="Action" selected="@(Model.GenreFilter == "Action")">Action</option>
+            <option value="Adventure" selected="@(Model.GenreFilter == "Adventure")">Adventure</option>
+            <option value="Biography" selected="@(Model.GenreFilter == "Biography")">Biography</option>
+            <option value="Classic" selected="@(Model.GenreFilter == "Classic")">Classic</option>
+            <option value="Comic" selected="@(Model.GenreFilter == "Comic")">Comic</option>
+            <option value="Crime" selected="@(Model.GenreFilter == "Crime")">Crime</option>
+            <option value="Drama" selected="@(Model.GenreFilter == "Drama")">Drama</option>
+            <option value="Fantasy" selected="@(Model.GenreFilter == "Fantasy")">Fantasy</option>
+            <option value="Historical" selected="@(Model.GenreFilter == "Historical")">Historical</option>
+            <option value="Horror" selected="@(Model.GenreFilter == "Horror")">Horror</option>
+            <option value="Mystery" selected="@(Model.GenreFilter == "Mystery")">Mystery</option>
+            <option value="Romance" selected="@(Model.GenreFilter == "Romance")">Romance</option>
+            <option value="Sci-Fi" selected="@(Model.GenreFilter == "Sci-Fi")">Sci-Fi</option>
+            <option value="Thriller" selected="@(Model.GenreFilter == "Thriller")">Thriller</option>
+            <option value="Western" selected="@(Model.GenreFilter == "Western")">Western</option>
+            <option value="Other" selected="@(Model.GenreFilter == "Wester")">Other</option>
         </select>
     </div>
 
@@ -117,28 +115,15 @@ ViewData["Title"] = "Comic Book";
         <input type="number" class="form-control" id="yearFilter" placeholder="Year" name="YearFilter" value="@Model.YearFilter">
     </div>
 
-    <div class="form-group">
-        <input type="text" class="form-control" id="authorFilter" placeholder="Author" name="AuthorFilter" value="@Model.AuthorFilter">
+    <div class="btn-group" role="group" aria-label="Watch Filter">
+        <input type="radio" id="watchFilterAll" name="WatchFilter" value="all" @(Model.WatchFilter == "all" ? "checked" : "")>
+        <label for="watchFilterAll" style="margin-right: 10px;">All</label>
+        <input type="radio" id="watchFilterWatched" name="WatchFilter" value="watch" @(Model.WatchFilter == "watch" ? "checked" : "")>
+        <label for="watchFilterWatched" style="margin-right: 10px;">Watched</label>
+        <input type="radio" id="watchFilterNotWatched" name="WatchFilter" value="not-watch" @(Model.WatchFilter == "not-watch" ? "checked" : "")>
+        <label for="watchFilterNotWatched">Not Watched</label>
     </div>
 
-    <div class="btn-group" role="group" aria-label="Read Filter">
-        <input type="radio" id="readFilterAll" name="ReadFilter" value="all" @(Model.ReadFilter == "all" ? "checked" : "")>
-        <label for="readFilterAll" style="margin-right: 10px;">All</label>
-        <input type="radio" id="readFilterRead" name="ReadFilter" value="read" @(Model.ReadFilter == "read" ? "checked" : "")>
-        <label for="readFilterRead" style="margin-right: 10px;">Read</label>
-        <input type="radio" id="readFilterNotRead" name="ReadFilter" value="not-read" @(Model.ReadFilter == "not-read" ? "checked" : "")>
-        <label for="readFilterNotRead">Not Read</label>
-    </div>
-    <div class="form-group">
-        <div class="btn-group" role="group" aria-label="Color Filter">
-            <input type="radio" id="colorFilterAll" name="ColorFilter" value="all" @(Model.ColorFilter == "all" ? "checked" : "")>
-            <label for="colorFilterAll" style="margin-right: 10px;">All</label>
-            <input type="radio" id="colorFilterColor" name="ColorFilter" value="color" @(Model.ColorFilter == "color" ? "checked" : "")>
-            <label for="colorFilterColor" style="margin-right: 10px;">Color</label>
-            <input type="radio" id="colorFilterNoColor" name="ColorFilter" value="no-color" @(Model.ColorFilter == "no-color" ? "checked" : "")>
-            <label for="colorFilterNoColor">No Color</label>
-        </div>
-    </div>
 
 
     <div class="form-group">
@@ -181,81 +166,77 @@ ViewData["Title"] = "Comic Book";
     </div>
 
     <button type="submit" class="btn btn-primary">Filter</button>
-    <a class="btn btn-secondary" style="margin: 10px;" href="ComicBook">Clear Filters</a>
+    <a class="btn btn-secondary" style="margin: 10px;" href="Movie">Clear Filters</a>
 </form>
 
-<h1>Comics Books</h1>
+<h1>Movies</h1>
 
-<a class="btn btn-primary" href="CreateComicBook">Add Comic</a>
+<a class="btn btn-primary" href="CreateMovie">Add Movie</a>
 
 <table class="table">
     <thead>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <tr>
             <th>Title</th>
-            <th>Author</th>
-            <th>Brand</th>
-            <th>Read</th>
-            <th>Color</th>
+            <th>Watched</th>
             <th>Link</th>
             <th>Year</th>
             <th>Language</th>
-            <th>Type</th>
+            <th>Genre</th>
             <th>Grade</th>
+            <th>Duration</th>
             <th>Description</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var comicsbook in Model.comicsBooks)
+        @foreach (var movie in Model.Movies)
         {
             <tr>
-                <td>@comicsbook.Title</td>
-                <td>@comicsbook.Author</td>
-                <td>@comicsbook.Brand</td>
-                <td>@(comicsbook.IsRead ? "Yes" : "No")</td>
-                <td>@(comicsbook.IsColor ? "Yes" : "No")</td>
+                <td>@movie.Title</td>
+                <td>@(movie.IsWatched ? "Yes" : "No")</td>
                 <td>
-                    @if (!string.IsNullOrEmpty(comicsbook.PhotoUrl))
+                    @if (!string.IsNullOrEmpty(movie.PosterUrl))
                     {
-                        <a href="@comicsbook.PhotoUrl" target="_blank">
-                            <img src="/images/link.png" alt="Comic Book Photo" style="max-height: 25px; max-width: 25px;" />
+                        <a href="@movie.PosterUrl" target="_blank">
+                            <img src="/images/link.png" alt="Movie Poster" style="max-height: 25px; max-width: 25px;" />
                         </a>
                     }
                 </td>
 
-                <td>@(comicsbook.Year.HasValue ? comicsbook.Year.ToString() : "")</td>
-                <td>@comicsbook.Language</td>
-                <td>@comicsbook.Type</td>
+                <td>@(movie.Year.HasValue ? movie.Year.ToString() : "")</td>
+                <td>@movie.Language</td>
+                <td>@movie.Genre</td>
                 <td>
-                    @if (comicsbook.Grade.HasValue && comicsbook.Grade == 0)
+                    @if (movie.Grade.HasValue && movie.Grade == 0)
                     {
-                        <a href="/EditComicBook?id=@comicsbook.Id" target="_blank">
-                            <img src="/images/review.png" alt="Book Photo" style="max-height: 25px; max-width: 25px;" />
+                        <a href="/EditMovie?id=@movie.Id" target="_blank">
+                            <img src="/images/review.png" alt="Movie Poster" style="max-height: 25px; max-width: 25px;" />
                         </a>
 
                     }
-                    @if (comicsbook.Grade.HasValue && comicsbook.Grade > 0)
+                    @if (movie.Grade.HasValue && movie.Grade > 0)
                     {
                         <div class="rating">
                             @for (int i = 1; i <= 5; i++)
                             {
-                                <span class="fa fa-star@(i <= comicsbook.Grade ? " checked" : "")"></span>
+                                <span class="fa fa-star@(i <= movie.Grade ? " checked" : "")"></span>
                             }
                         </div>
 
                     }
 
                 </td>
+                <td>@movie.Duration</td>
 
 
 
                 <td>
-                    @if (!string.IsNullOrEmpty(comicsbook.Description))
+                    @if (!string.IsNullOrEmpty(movie.Description))
                     {
                         <div class="description_overflow_handle">
-                            @comicsbook.Description
+                            @movie.Description
                         </div>
 
 
@@ -263,10 +244,10 @@ ViewData["Title"] = "Comic Book";
                 </td>
 
                 <td>
-                    <a class="btn btn-primary" href="EditComicBook?id=@comicsbook.Id">Edit</a>
+                    <a class="btn btn-primary" href="EditMovie?id=@movie.Id">Edit</a>
                 </td>
                 <td>
-                    <form method="post" asp-page-handler="Delete" asp-route-id="@comicsbook.Id">
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@movie.Id">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
@@ -277,20 +258,20 @@ ViewData["Title"] = "Comic Book";
 
     </tbody>
 </table>
-@if (Model.comicsBooks.Count > 0)
+@if (Model.Movies.Count > 0)
 {
 
     var random = new Random();
-    var unreadBooks = Model.comicsBooks.Where(book => !book.IsRead).ToList();
+    var unreadMovies = Model.Movies.Where(movie => !movie.IsWatched).ToList();
 
-    if (unreadBooks.Count > 0)
+    if (unreadMovies.Count > 0)
     {
-        var recommendationIndex = random.Next(0, unreadBooks.Count);
-        var recommendedBook = unreadBooks[recommendationIndex];
+        var recommendationIndex = random.Next(0, unreadMovies.Count);
+        var recommendedMovie = unreadMovies[recommendationIndex];
         <div class="recommendation-section">
             <div class="book-details">
-                <h2>You can read <em>@recommendedBook.Title</em></h2>
-                <p>@recommendedBook.Type book, written by @recommendedBook.Author in @recommendedBook.Language</p>
+                <h2>You can read <em>@recommendedMovie.Title</em></h2>
+                <p>@recommendedMovie.Genre movie, duration of @recommendedMovie.Duration in @recommendedMovie.Language</p>
             </div>
         </div>
     }

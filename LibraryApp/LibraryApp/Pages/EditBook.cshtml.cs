@@ -84,7 +84,7 @@ namespace LibraryApp.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Book");
         }
 
         private bool BookExists(long id)
