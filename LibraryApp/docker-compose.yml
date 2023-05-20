@@ -21,12 +21,3 @@ services:
       - SA_PASSWORD=Dotnet2024!
     ports:
       - "1433:1433"
-
-  librarytests:
-    container_name: LibraryTests
-    build:
-      context: .
-      dockerfile: LibraryTests/Dockerfile
-    depends_on:
-      - libraryapp
-      - sqlserver
